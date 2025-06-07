@@ -24,8 +24,12 @@
             </intent-filter>
         </activity>
 
+        <!-- LoginActivity: Add this -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
 
+        <!-- Add more activities here as you build your app -->
 
     </application>
-
 </manifest>
