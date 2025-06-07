@@ -34,6 +34,7 @@ android {
 
 dependencies {
 
+    implementation ("androidx.cardview:cardview:1.0.0")
     implementation("com.google.firebase:firebase-auth:22.3.0")  // Or use the latest version
     implementation(libs.appcompat)
     implementation(libs.material)

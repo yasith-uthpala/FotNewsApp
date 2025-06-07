@@ -13,7 +13,7 @@
         android:theme="@style/Theme.FotNewsApp"
         tools:targetApi="31">
 
-        <!-- SplashActivity: set as launcher -->
+
         <activity
             android:name=".SplashActivity"
             android:exported="true"
@@ -24,12 +24,13 @@
             </intent-filter>
         </activity>
 
-        <!-- LoginActivity: Add this -->
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
 
-        <!-- Add more activities here as you build your app -->
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="false" />
 
     </application>
 </manifest>
