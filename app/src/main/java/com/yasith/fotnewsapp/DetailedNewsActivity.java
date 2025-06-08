@@ -75,6 +75,7 @@ public class DetailedNewsActivity extends AppCompatActivity {
                     likes = snapshot.exists() ? snapshot.getValue(Integer.class) : 0;
                     likeCount.setText(String.valueOf(likes));
                 }
+
                 @Override
                 public void onCancelled(DatabaseError error) { }
             });
@@ -83,7 +84,13 @@ public class DetailedNewsActivity extends AppCompatActivity {
         likeButton.setOnClickListener(v -> handleLike());
 
         backButton.setOnClickListener(v -> onBackPressed());
-        infoIcon.setOnClickListener(v -> { });
+
+
+        infoIcon.setOnClickListener(v -> {
+            Intent developerInfoIntent = new Intent(DetailedNewsActivity.this, DeveloperInfoActivity.class);
+            startActivity(developerInfoIntent);
+        });
+
         userIcon.setOnClickListener(v -> { });
     }
 
@@ -104,6 +111,7 @@ public class DetailedNewsActivity extends AppCompatActivity {
                     likeCount.setText(String.valueOf(likes));
                 }
             }
+
             @Override
             public void onCancelled(DatabaseError error) { }
         });

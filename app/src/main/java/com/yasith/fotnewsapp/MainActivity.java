@@ -1,10 +1,12 @@
 package com.yasith.fotnewsapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     private LinearLayout sportCategory, academicCategory, eventsCategory;
     private EditText searchNewsEditText;
+    private ImageView infoIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         sportCategory = findViewById(R.id.sportCategory);
         academicCategory = findViewById(R.id.academicCategory);
         eventsCategory = findViewById(R.id.eventsCategory);
+        infoIcon = findViewById(R.id.infoIcon);
 
         sportCategory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +123,12 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(android.text.Editable editable) {}
+        });
+
+
+        infoIcon.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, DeveloperInfoActivity.class);
+            startActivity(intent);
         });
     }
 
