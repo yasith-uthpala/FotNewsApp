@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#0A0A23">
 
-    <!-- Logo centered horizontally and vertically -->
+
     <ImageView
         android:id="@+id/logoImage"
         android:layout_width="241dp"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5" />
 
-    <!-- Footer text pinned to bottom -->
+
     <TextView
         android:id="@+id/footerText"
         android:layout_width="wrap_content"

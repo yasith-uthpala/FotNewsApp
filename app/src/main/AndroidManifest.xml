@@ -41,6 +41,10 @@
             android:name=".MainActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".DetailedNewsActivity"
+            android:exported="false" />
+
 
     </application>
 

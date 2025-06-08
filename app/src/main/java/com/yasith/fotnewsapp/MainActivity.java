@@ -16,15 +16,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private NewsAdapter newsAdapter;
     private List<NewsItem> newsList;
+    private List<String> newsKeys;
     private List<NewsItem> filteredNewsList;
+    private List<String> filteredKeysList;
     private DatabaseReference databaseReference;
 
     private LinearLayout sportCategory, academicCategory, eventsCategory;
@@ -41,9 +47,11 @@ public class MainActivity extends AppCompatActivity {
         searchNewsEditText = findViewById(R.id.searchNews);
 
         newsList = new ArrayList<>();
+        newsKeys = new ArrayList<>();
         filteredNewsList = new ArrayList<>();
+        filteredKeysList = new ArrayList<>();
 
-        newsAdapter = new NewsAdapter(filteredNewsList);
+        newsAdapter = new NewsAdapter(filteredNewsList, filteredKeysList);
         recyclerView.setAdapter(newsAdapter);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("news");
@@ -51,14 +59,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 newsList.clear();
+                newsKeys.clear();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     NewsItem newsItem = snapshot.getValue(NewsItem.class);
+                    String key = snapshot.getKey();
                     newsList.add(newsItem);
+                    newsKeys.add(key);
                 }
 
+                sortNewsByDate();
                 filterNews("");
-
                 newsAdapter.notifyDataSetChanged();
             }
 
@@ -111,16 +122,40 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void sortNewsByDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+        Collections.sort(newsList, (news1, news2) -> {
+            try {
+                Date date1 = sdf.parse(news1.getDate());
+                Date date2 = sdf.parse(news2.getDate());
+                return date2.compareTo(date1);
+            } catch (Exception e) {
+                return 0;
+            }
+        });
+
+        List<String> sortedKeys = new ArrayList<>();
+        for (NewsItem item : newsList) {
+            int idx = newsList.indexOf(item);
+            sortedKeys.add(newsKeys.get(idx));
+        }
+        newsKeys = sortedKeys;
+    }
+
     private void filterNews(String query) {
         filteredNewsList.clear();
+        filteredKeysList.clear();
 
         if (query.isEmpty()) {
             filteredNewsList.addAll(newsList);
+            filteredKeysList.addAll(newsKeys);
         } else {
-            for (NewsItem newsItem : newsList) {
+            for (int i = 0; i < newsList.size(); i++) {
+                NewsItem newsItem = newsList.get(i);
                 if (newsItem.getTitle().toLowerCase().contains(query.toLowerCase()) ||
                         newsItem.getDescription().toLowerCase().contains(query.toLowerCase())) {
                     filteredNewsList.add(newsItem);
+                    filteredKeysList.add(newsKeys.get(i));
                 }
             }
         }
@@ -130,14 +165,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void filterNewsByCategory(String category) {
         filteredNewsList.clear();
+        filteredKeysList.clear();
         boolean isCategoryEmpty = true;
 
         if (category.equals("all")) {
             filteredNewsList.addAll(newsList);
+            filteredKeysList.addAll(newsKeys);
         } else {
-            for (NewsItem newsItem : newsList) {
+            for (int i = 0; i < newsList.size(); i++) {
+                NewsItem newsItem = newsList.get(i);
                 if (newsItem.getCategory().equalsIgnoreCase(category)) {
                     filteredNewsList.add(newsItem);
+                    filteredKeysList.add(newsKeys.get(i));
                     isCategoryEmpty = false;
                 }
             }
