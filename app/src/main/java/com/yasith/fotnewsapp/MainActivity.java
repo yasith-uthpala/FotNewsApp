@@ -16,8 +16,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
                     newsList.add(newsItem);
                 }
 
+                sortNewsByDate();
                 filterNews("");
-
                 newsAdapter.notifyDataSetChanged();
             }
 
@@ -108,6 +112,19 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(android.text.Editable editable) {}
+        });
+    }
+
+    private void sortNewsByDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+        Collections.sort(newsList, (news1, news2) -> {
+            try {
+                Date date1 = sdf.parse(news1.getDate());
+                Date date2 = sdf.parse(news2.getDate());
+                return date2.compareTo(date1);
+            } catch (Exception e) {
+                return 0;
+            }
         });
     }
 

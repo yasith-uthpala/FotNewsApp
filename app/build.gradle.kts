@@ -43,6 +43,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation ("jp.wasabeef:glide-transformations:4.3.0")
 
 
 

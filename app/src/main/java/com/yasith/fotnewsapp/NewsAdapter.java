@@ -1,5 +1,7 @@
 package com.yasith.fotnewsapp;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +30,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             newsTitle = itemView.findViewById(R.id.newsTitle);
             newsDescription = itemView.findViewById(R.id.newsDescription);
             newsDate = itemView.findViewById(R.id.newsDate);
+
         }
     }
 
@@ -38,7 +41,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     @Override
     public NewsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.news_card_item, parent, false); // Make sure your news_card_item.xml exists
+                .inflate(R.layout.news_card_item, parent, false);
         return new NewsViewHolder(itemView);
     }
 
@@ -53,6 +56,21 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         holder.newsTitle.setText(currentItem.getTitle());
         holder.newsDescription.setText(currentItem.getDescription());
         holder.newsDate.setText(currentItem.getDate());
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Intent intent = new Intent(context, DetailedNewsActivity.class);
+                intent.putExtra("title", currentItem.getTitle());
+                intent.putExtra("description", currentItem.getDescription());
+                intent.putExtra("date", currentItem.getDate());
+                intent.putExtra("imageUrl", currentItem.getImageUrl());
+                intent.putExtra("time", currentItem.getTime());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
