@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -65,7 +67,6 @@ public class DetailedNewsActivity extends AppCompatActivity {
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(cornerRadiusPx)))
                 .into(newsImageView);
 
-        // Always read live likes from Firebase on open
         if (newsKey != null) {
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("news").child(newsKey).child("likes");
             ref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -79,18 +80,33 @@ public class DetailedNewsActivity extends AppCompatActivity {
             });
         }
 
-        likeButton.setOnClickListener(v -> {
-            likes++;
-            likeCount.setText(String.valueOf(likes));
-            if (newsKey != null) {
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("news").child(newsKey).child("likes");
-                ref.setValue(likes);
-            }
-        });
+        likeButton.setOnClickListener(v -> handleLike());
 
         backButton.setOnClickListener(v -> onBackPressed());
         infoIcon.setOnClickListener(v -> { });
         userIcon.setOnClickListener(v -> { });
+    }
+
+    private void handleLike() {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference newsRef = FirebaseDatabase.getInstance().getReference("news").child(newsKey);
+        DatabaseReference likedUsersRef = newsRef.child("likedUsers").child(userId);
+
+        likedUsersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    Toast.makeText(DetailedNewsActivity.this, "You already liked this news.", Toast.LENGTH_SHORT).show();
+                } else {
+                    likedUsersRef.setValue(true);
+                    newsRef.child("likes").setValue(likes + 1);
+                    likes++;
+                    likeCount.setText(String.valueOf(likes));
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError error) { }
+        });
     }
 
     private String getFormattedTime(String dateString, String timeString) {
