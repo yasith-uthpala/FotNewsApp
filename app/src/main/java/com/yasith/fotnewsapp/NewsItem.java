@@ -8,17 +8,19 @@ public class NewsItem {
     private String time;
     private String imageUrl;
     private String category;
+    private int likes;
 
     public NewsItem() {
     }
 
-    public NewsItem(String title, String description, String date, String time, String imageUrl, String category) {
+    public NewsItem(String title, String description, String date, String time, String imageUrl, String category, int likes) {
         this.title = title;
         this.description = description;
         this.date = date;
         this.time = time;
         this.imageUrl = imageUrl;
         this.category = category;
+        this.likes = likes;
     }
 
     public String getTitle() {
@@ -61,5 +63,12 @@ public class NewsItem {
     }
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+    public void setLikes(int likes) {
+        this.likes = likes;
     }
 }

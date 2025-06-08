@@ -3,7 +3,6 @@
     android:layout_height="match_parent"
     android:background="#0A0A23">
 
-
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
@@ -45,7 +44,6 @@
             android:background="?android:attr/selectableItemBackgroundBorderless" />
     </LinearLayout>
 
-
     <ImageView
         android:id="@+id/newsImage"
         android:layout_width="match_parent"
@@ -55,7 +53,6 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:scaleType="centerCrop" />
-
 
     <LinearLayout
         android:id="@+id/dateTimeRow"
@@ -89,7 +86,6 @@
             android:gravity="end" />
     </LinearLayout>
 
-
     <TextView
         android:id="@+id/newsTitle"
         android:layout_width="match_parent"
@@ -113,5 +109,35 @@
         android:layout_marginTop="26dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"/>
+
+    <LinearLayout
+        android:id="@+id/likeRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/newsDescription"
+        android:layout_marginTop="32dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="30dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/likeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:layout_marginRight="8dp"/>
+
+        <ImageView
+            android:id="@+id/likeButton"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_like"
+            android:contentDescription="Like"
+            android:background="?android:attr/selectableItemBackgroundBorderless" />
+    </LinearLayout>
 
 </RelativeLayout>

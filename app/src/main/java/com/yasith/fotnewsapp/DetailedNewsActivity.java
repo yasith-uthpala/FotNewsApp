@@ -10,6 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,8 +22,10 @@ import java.util.Locale;
 
 public class DetailedNewsActivity extends AppCompatActivity {
 
-    private ImageView newsImageView, backButton, infoIcon, userIcon;
-    private TextView titleTextView, descriptionTextView, dateTextView, timeTextView;
+    private ImageView newsImageView, backButton, infoIcon, userIcon, likeButton;
+    private TextView titleTextView, descriptionTextView, dateTextView, timeTextView, likeCount;
+    private int likes = 0;
+    private String newsKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +40,8 @@ public class DetailedNewsActivity extends AppCompatActivity {
         descriptionTextView = findViewById(R.id.newsDescription);
         dateTextView = findViewById(R.id.newsDate);
         timeTextView = findViewById(R.id.newsTime);
+        likeButton = findViewById(R.id.likeButton);
+        likeCount = findViewById(R.id.likeCount);
 
         Intent intent = getIntent();
         String title = intent.getStringExtra("title");
@@ -40,6 +49,7 @@ public class DetailedNewsActivity extends AppCompatActivity {
         String date = intent.getStringExtra("date");
         String time = intent.getStringExtra("time");
         String imageUrl = intent.getStringExtra("imageUrl");
+        newsKey = intent.getStringExtra("newsKey");
 
         titleTextView.setText(title);
         descriptionTextView.setText(description);
@@ -54,6 +64,29 @@ public class DetailedNewsActivity extends AppCompatActivity {
                 .load(imageUrl)
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(cornerRadiusPx)))
                 .into(newsImageView);
+
+        // Always read live likes from Firebase on open
+        if (newsKey != null) {
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("news").child(newsKey).child("likes");
+            ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    likes = snapshot.exists() ? snapshot.getValue(Integer.class) : 0;
+                    likeCount.setText(String.valueOf(likes));
+                }
+                @Override
+                public void onCancelled(DatabaseError error) { }
+            });
+        }
+
+        likeButton.setOnClickListener(v -> {
+            likes++;
+            likeCount.setText(String.valueOf(likes));
+            if (newsKey != null) {
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("news").child(newsKey).child("likes");
+                ref.setValue(likes);
+            }
+        });
 
         backButton.setOnClickListener(v -> onBackPressed());
         infoIcon.setOnClickListener(v -> { });

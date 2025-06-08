@@ -17,6 +17,7 @@ import java.util.List;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
 
     private List<NewsItem> newsList;
+    private List<String> newsKeys;
 
     public static class NewsViewHolder extends RecyclerView.ViewHolder {
         public ImageView newsImage;
@@ -30,12 +31,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             newsTitle = itemView.findViewById(R.id.newsTitle);
             newsDescription = itemView.findViewById(R.id.newsDescription);
             newsDate = itemView.findViewById(R.id.newsDate);
-
         }
     }
 
-    public NewsAdapter(List<NewsItem> newsList) {
+    public NewsAdapter(List<NewsItem> newsList, List<String> newsKeys) {
         this.newsList = newsList;
+        this.newsKeys = newsKeys;
     }
 
     @Override
@@ -48,6 +49,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     @Override
     public void onBindViewHolder(NewsViewHolder holder, int position) {
         NewsItem currentItem = newsList.get(position);
+        String newsKey = newsKeys.get(position);
 
         Glide.with(holder.newsImage.getContext())
                 .load(currentItem.getImageUrl())
@@ -56,7 +58,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         holder.newsTitle.setText(currentItem.getTitle());
         holder.newsDescription.setText(currentItem.getDescription());
         holder.newsDate.setText(currentItem.getDate());
-
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +69,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
                 intent.putExtra("date", currentItem.getDate());
                 intent.putExtra("imageUrl", currentItem.getImageUrl());
                 intent.putExtra("time", currentItem.getTime());
+                intent.putExtra("likes", currentItem.getLikes());
+                intent.putExtra("newsKey", newsKey);
                 context.startActivity(intent);
             }
         });
