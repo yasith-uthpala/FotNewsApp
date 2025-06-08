@@ -33,14 +33,19 @@ android {
 }
 
 dependencies {
-
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
     implementation ("androidx.cardview:cardview:1.0.0")
-    implementation("com.google.firebase:firebase-auth:22.3.0")  // Or use the latest version
+    implementation("com.google.firebase:firebase-auth:22.3.0")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.firebase.database)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+
+
+
 
 }
