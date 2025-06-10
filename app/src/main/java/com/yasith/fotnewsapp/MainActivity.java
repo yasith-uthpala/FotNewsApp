@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     private LinearLayout sportCategory, academicCategory, eventsCategory;
     private EditText searchNewsEditText;
-    private ImageView infoIcon;
+    private ImageView infoIcon, userIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,27 +86,13 @@ public class MainActivity extends AppCompatActivity {
         academicCategory = findViewById(R.id.academicCategory);
         eventsCategory = findViewById(R.id.eventsCategory);
         infoIcon = findViewById(R.id.infoIcon);
+        userIcon = findViewById(R.id.userIcon);
 
-        sportCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                filterNewsByCategory("Sport");
-            }
-        });
+        sportCategory.setOnClickListener(v -> filterNewsByCategory("Sport"));
 
-        academicCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                filterNewsByCategory("Academic");
-            }
-        });
+        academicCategory.setOnClickListener(v -> filterNewsByCategory("Academic"));
 
-        eventsCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                filterNewsByCategory("Events");
-            }
-        });
+        eventsCategory.setOnClickListener(v -> filterNewsByCategory("Events"));
 
         searchNewsEditText.addTextChangedListener(new android.text.TextWatcher() {
             @Override
@@ -125,9 +111,13 @@ public class MainActivity extends AppCompatActivity {
             public void afterTextChanged(android.text.Editable editable) {}
         });
 
-
         infoIcon.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, DeveloperInfoActivity.class);
+            startActivity(intent);
+        });
+
+        userIcon.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, UserInfoActivity.class);
             startActivity(intent);
         });
     }
