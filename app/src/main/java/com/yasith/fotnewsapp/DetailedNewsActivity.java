@@ -85,13 +85,15 @@ public class DetailedNewsActivity extends AppCompatActivity {
 
         backButton.setOnClickListener(v -> onBackPressed());
 
-
         infoIcon.setOnClickListener(v -> {
             Intent developerInfoIntent = new Intent(DetailedNewsActivity.this, DeveloperInfoActivity.class);
             startActivity(developerInfoIntent);
         });
 
-        userIcon.setOnClickListener(v -> { });
+        userIcon.setOnClickListener(v -> {
+            Intent userInfoIntent = new Intent(DetailedNewsActivity.this, UserInfoActivity.class);
+            startActivity(userInfoIntent);
+        });
     }
 
     private void handleLike() {

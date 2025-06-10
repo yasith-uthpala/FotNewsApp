@@ -45,6 +45,8 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation ("jp.wasabeef:glide-transformations:4.3.0")
+    implementation ("com.google.firebase:firebase-auth:21.0.1")
+    implementation ("androidx.cardview:cardview:1.0.0")
 
 
 

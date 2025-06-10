@@ -45,8 +45,12 @@
             android:name=".DetailedNewsActivity"
             android:exported="false" />
 
-        <activity android:name=".DeveloperInfoActivity" />
-
+        <activity
+            android:name=".DeveloperInfoActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".UserInfoActivity"
+            android:exported="true"/>
 
     </application>
 
