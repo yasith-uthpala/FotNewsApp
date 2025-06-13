@@ -42,7 +42,10 @@
             android:text="Faculty of Technology Gym Opening ...."
             android:textSize="14sp"
             android:textColor="#777"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="4dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            />
 
 
         <TextView
