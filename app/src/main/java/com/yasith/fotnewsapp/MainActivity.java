@@ -123,24 +123,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sortNewsByDate() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
-        Collections.sort(newsList, (news1, news2) -> {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.getDefault());
+        List<NewsItem> sortedNewsList = new ArrayList<>();
+        List<String> sortedKeys = new ArrayList<>();
+
+        List<Integer> indexes = new ArrayList<>();
+        for (int i = 0; i < newsList.size(); i++) indexes.add(i);
+
+        Collections.sort(indexes, (i1, i2) -> {
             try {
-                Date date1 = sdf.parse(news1.getDate());
-                Date date2 = sdf.parse(news2.getDate());
+                String dt1 = newsList.get(i1).getDate() + " " + newsList.get(i1).getTime();
+                String dt2 = newsList.get(i2).getDate() + " " + newsList.get(i2).getTime();
+                Date date1 = sdf.parse(dt1);
+                Date date2 = sdf.parse(dt2);
                 return date2.compareTo(date1);
             } catch (Exception e) {
                 return 0;
             }
         });
 
-        List<String> sortedKeys = new ArrayList<>();
-        for (NewsItem item : newsList) {
-            int idx = newsList.indexOf(item);
+        for (int idx : indexes) {
+            sortedNewsList.add(newsList.get(idx));
             sortedKeys.add(newsKeys.get(idx));
         }
-        newsKeys = sortedKeys;
+        newsList.clear();
+        newsList.addAll(sortedNewsList);
+        newsKeys.clear();
+        newsKeys.addAll(sortedKeys);
     }
+
 
     private void filterNews(String query) {
         filteredNewsList.clear();
