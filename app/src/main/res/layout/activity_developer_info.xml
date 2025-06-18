@@ -1,0 +1,103 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A0A23">
+
+    <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_back"
+        android:contentDescription="Back"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="20dp"
+        android:layout_alignParentLeft="true"
+        android:background="?android:attr/selectableItemBackgroundBorderless" />
+
+    <TextView
+        android:id="@+id/developerInfoTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Developer Info"
+        android:textColor="#00FFFF"
+        android:textSize="24sp"
+        android:layout_below="@id/backButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-20dp"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:id="@+id/developerImage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/developerInfoTitle"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/developer_image" />
+
+    <TextView
+        android:id="@+id/developerName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/developerImage"
+        android:layout_marginTop="20dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:text="Name: H.M. Yasith Uthpala Bandara"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/developerStudentNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Student Num: 2022T01521"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:layout_below="@id/developerName"
+        android:layout_marginTop="10dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/developerStatement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Personal Statement: Passionate about mobile app development and delivering user-friendly digital experiences"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:layout_below="@id/developerStudentNumber"
+        android:layout_marginTop="20dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/developerVersion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/developerStatement"
+        android:layout_marginTop="55dp"
+        android:gravity="center"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:text="Release Version: 1.0.1"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/exitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Exit"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/rounded_buttonex_bg"
+        android:textColor="#FFFFFF"
+        android:onClick="exitButtonClicked"/>
+
+</RelativeLayout>

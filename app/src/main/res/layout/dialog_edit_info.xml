@@ -1,0 +1,90 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/rounded_container"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit Details"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:id="@+id/usernameLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:gravity="left"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/editUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Username"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:background="@drawable/rounded_edittext"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:textColorHint="#B0B0B0"/>
+
+    <TextView
+        android:id="@+id/emailLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:gravity="left"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/editEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Email"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:background="@drawable/rounded_edittext"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:textColorHint="#B0B0B0"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="30dp">
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:background="@drawable/rounded_button_green"
+            android:textColor="#FFFFFF"
+            android:layout_marginEnd="10dp"
+            android:onClick="saveDetails"/>
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:background="@drawable/rounded_button_red"
+            android:textColor="#FFFFFF"
+            android:onClick="cancelEdit"/>
+    </LinearLayout>
+</LinearLayout>

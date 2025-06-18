@@ -1,0 +1,119 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A0A23"
+    android:padding="20dp">
+
+    <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_back"
+        android:contentDescription="Back"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="16dp"
+        android:layout_alignParentLeft="true"
+        android:background="?android:attr/selectableItemBackgroundBorderless" />
+
+    <ImageView
+        android:id="@+id/userImage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/user_icon" />
+
+    <TextView
+        android:id="@+id/userInfoTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="User Info"
+        android:textColor="#D3D3D3"
+        android:textSize="18sp"
+        android:layout_below="@id/userImage"
+        android:layout_marginTop="20dp"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/usernameLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:layout_below="@id/userInfoTitle"
+        android:layout_marginTop="20dp"
+        android:gravity="left"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="yasith_uthpala"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="@color/l_gray"
+        android:textSize="16sp"
+        android:layout_below="@id/usernameLabel"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+
+        android:background="@drawable/rounded_edittext"
+        android:padding="10dp" />
+
+    <TextView
+        android:id="@+id/emailLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:layout_below="@id/username"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+         />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="yasithtest@gmail.com"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:backgroundTint="@color/l_gray"
+        android:layout_below="@id/emailLabel"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+
+        android:background="@drawable/rounded_edittext"
+        android:padding="10dp" />
+
+    <Button
+        android:id="@+id/editInfoButton"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/email"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="31dp"
+        android:background="@drawable/rounded_button_green"
+        android:onClick="openEditDialog"
+        android:text="Edit Information"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/signOutButton"
+        android:layout_width="141dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editInfoButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/rounded_button_red"
+        android:onClick="openSignOutDialog"
+        android:text="Sign Out"
+        android:textColor="#FFFFFF" />
+
+</RelativeLayout>
